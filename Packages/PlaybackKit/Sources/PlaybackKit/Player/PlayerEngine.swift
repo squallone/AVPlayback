@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol PlayerEngine {
+public protocol PlayerEngine {
     var eventPublisher: AnyPublisher<PlayerEvent, Never> { get }
     
     func load(item: PlayerItem)

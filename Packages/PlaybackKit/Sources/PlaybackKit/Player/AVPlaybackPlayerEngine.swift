@@ -8,12 +8,9 @@
 import AVFoundation
 import Combine
 import Foundation
-#if canImport(AVFAudio)
-import AVFAudio
-#endif
 
-final class AVPlaybackPlayerEngine: PlayerEngine {
-    private let player: AVPlayer
+final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
+    private(set) var player: AVPlayer
     private let eventSubject = PassthroughSubject<PlayerEvent, Never>()
     private let errorMapper: ErrorMapper
     

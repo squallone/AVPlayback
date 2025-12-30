@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		58732BE42F02396E00A7657E /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 58732BE32F02396E00A7657E /* AppFoundation */; };
 		58732BE72F02436B00A7657E /* PlaybackKit in Frameworks */ = {isa = PBXBuildFile; productRef = 58732BE62F02436B00A7657E /* PlaybackKit */; };
+		58732BF02F038D5D00A7657E /* PlaybackUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58732BEF2F038D5D00A7657E /* PlaybackUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +35,22 @@
 		58732BA72F0209E900A7657E /* AVPlaybackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVPlaybackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		58D7647A2F03B9A100CA89AB /* Exceptions for "AVPlayback" folder in "AVPlayback" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 58732B8F2F0209E700A7657E /* AVPlayback */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		58732B922F0209E700A7657E /* AVPlayback */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				58D7647A2F03B9A100CA89AB /* Exceptions for "AVPlayback" folder in "AVPlayback" target */,
+			);
 			path = AVPlayback;
 			sourceTree = "<group>";
 		};
@@ -58,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58732BE72F02436B00A7657E /* PlaybackKit in Frameworks */,
+				58732BF02F038D5D00A7657E /* PlaybackUI in Frameworks */,
 				58732BE42F02396E00A7657E /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +136,7 @@
 			packageProductDependencies = (
 				58732BE32F02396E00A7657E /* AppFoundation */,
 				58732BE62F02436B00A7657E /* PlaybackKit */,
+				58732BEF2F038D5D00A7657E /* PlaybackUI */,
 			);
 			productName = AVPlayback;
 			productReference = 58732B902F0209E700A7657E /* AVPlayback.app */;
@@ -207,6 +223,7 @@
 			packageReferences = (
 				58732BE22F02396E00A7657E /* XCLocalSwiftPackageReference "Packages/AppFoundation" */,
 				58732BE52F02436B00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackKit" */,
+				58732BEE2F038D5D00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 58732B912F0209E700A7657E /* Products */;
@@ -404,9 +421,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AVPlayback/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -446,9 +474,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AVPlayback/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -628,6 +667,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/PlaybackKit;
 		};
+		58732BEE2F038D5D00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/PlaybackUI;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -638,6 +681,10 @@
 		58732BE62F02436B00A7657E /* PlaybackKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PlaybackKit;
+		};
+		58732BEF2F038D5D00A7657E /* PlaybackUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaybackUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

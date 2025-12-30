@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LifecycleEvent: Sendable, Equatable {
+public enum LifecycleEvent: Sendable, Equatable {
     case didLoad(item: PlayerItem)
     case didStartPlayback
     case didPause

@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct PlayerError: Error {
+public struct PlayerError: Error {
     let id = UUID()
     let category: Category
     let message: String
     let originalError: NSError?
 }
 
-extension PlayerError {
+public extension PlayerError {
     enum Category: String, Equatable {
         case network
         case decoding

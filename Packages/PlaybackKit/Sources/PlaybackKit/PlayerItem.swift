@@ -10,5 +10,12 @@ import Foundation
 public struct PlayerItem: Sendable, Equatable {
     public let url: URL
     public let preferredForwardBufferDuration: TimeInterval
-    public let contentType: String?
+    
+    public init(
+        url: URL,
+        preferredForwardBufferDuration: TimeInterval = 10.0,
+    ) {
+        self.url = url
+        self.preferredForwardBufferDuration = preferredForwardBufferDuration
+    }
 }

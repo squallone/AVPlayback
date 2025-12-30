@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlayerStatus: Equatable {
+public enum PlayerStatus: Sendable, Equatable {
     case idle
     case playing
     case paused

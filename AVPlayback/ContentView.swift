@@ -6,16 +6,11 @@
 //
 
 import SwiftUI
+import PlaybackUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        VideoPlayerFactory.makeVideoPlayer(url: URL(string: "http://23.237.104.106:8080/USA_CBS_SPORTS/index.m3u8")!)
     }
 }
 

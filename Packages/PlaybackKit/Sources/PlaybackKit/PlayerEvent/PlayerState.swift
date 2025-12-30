@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlayerStateChange: Sendable, Equatable {
+public enum PlayerStateChange: Sendable, Equatable {
     case statusChanged(PlayerStatus)
     case rateChanged(Float)
     case currentTimeChanged(TimeInterval)

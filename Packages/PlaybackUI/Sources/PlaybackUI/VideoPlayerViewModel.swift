@@ -1,0 +1,101 @@
+//
+//  VideoPlayerViewModel.swift
+//  AVPlayback
+//
+//  Created by Abdiel Soto on 12/29/25.
+//
+
+import Foundation
+import PlaybackKit
+import Combine
+
+@Observable
+@MainActor
+final class VideoPlayerViewModel {
+    
+    // UI
+    var status: PlayerStatus = .idle
+    var currentTime: Double = 0
+    var duration: Double = 0
+    var bufferProgress: Double = 0
+    var currentItem: PlayerItem?
+    var activeError: PlayerError?
+    
+    @ObservationIgnored
+    private(set) var player: PlayerEngine
+    @ObservationIgnored
+    private var cancellables = Set<AnyCancellable>()
+    @ObservationIgnored
+    private var isScrubbing = false
+    @ObservationIgnored
+    private let url: URL
+    
+    // MARK: Initialization
+    init(url: URL, player: PlayerEngine) {
+        self.player = player
+        self.url = url
+    }
+    
+    // MARK: Observers
+    
+    private func startObservingPlayer() {
+        player.eventPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] event in
+                self?.handleEvent(event)
+            }
+            .store(in: &cancellables)
+    }
+    
+    // MARK: Events
+    
+    private func handleEvent(_ event: PlayerEvent) {
+        switch event {
+        case .state(let stateChange):
+            handleStateChange(stateChange)
+        case .error(let error):
+            self.activeError = error
+            
+        @unknown default:
+            break
+        }
+    }
+    
+    private func handleStateChange(_ state: PlayerStateChange) {
+        switch state {
+        case .statusChanged(let status):
+            if status == .playing {
+                activeError = nil
+            }
+            self.status = status
+        case .currentTimeChanged(let time):
+            if !isScrubbing {
+                self.currentTime = time
+            }
+        case .durationChanged(let duration):
+            self.duration = duration
+        case .bufferedFractionChanged(let fraction):
+            self.bufferProgress = fraction
+        case .rateChanged(_):
+            break
+        }
+    }
+    
+    // MARK: Player Handling
+    func load() {
+        let item = PlayerItem(url: url)
+        self.currentItem = item
+        
+        player.load(item: item)
+        player.play()
+    }
+    
+    func togglePause() {
+        if status == .playing {
+            player.pause()
+        } else {
+            player.play()
+        }
+    }
+    
+}

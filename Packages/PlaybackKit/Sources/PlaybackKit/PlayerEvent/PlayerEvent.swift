@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PlayerEvent {
+public enum PlayerEvent {
     case state(PlayerStateChange)
     case lifecycle(LifecycleEvent)
     case diagnostics
