@@ -14,6 +14,7 @@ public protocol PlayerEngine {
     func load(item: PlayerItem)
     func play()
     func pause()
+    @MainActor
     func seek(to time: TimeInterval) async
     func setRate(_ rate: Float)
 }

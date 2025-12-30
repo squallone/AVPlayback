@@ -9,12 +9,9 @@ import Foundation
 
 struct DebuggerPlugin: PlayerPlugin {
     
-    init() {
-        
-    }
-    
+    private let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
+
     func onEvent(_ event: PlayerEvent, engine: any PlayerEngine) {
-        let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
         
         switch event {
         case .state(let state):
@@ -29,6 +26,7 @@ struct DebuggerPlugin: PlayerPlugin {
     private func handleState(_ state: PlayerStateChange) {
         switch state {
         case .statusChanged(let status):
+            print("🔍 [\(timestamp)] STATUS CHANGE: \(status)")
             if case .idle = status {
                 print("⚠️ Player went Idle. Checking Engine...")
             }

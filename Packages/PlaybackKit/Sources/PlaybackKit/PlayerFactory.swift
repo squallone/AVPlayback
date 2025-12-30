@@ -9,6 +9,6 @@ import Foundation
 
 public struct PlayerFactory {
     public static func make() -> PlayerEngine {
-        AVPlaybackPlayerEngine()
+        AVPlaybackPlayerEngine(plugins: [DebuggerPlugin()])
     }
 }

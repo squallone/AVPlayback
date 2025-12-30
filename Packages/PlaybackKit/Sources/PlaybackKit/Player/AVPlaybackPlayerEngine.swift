@@ -21,12 +21,16 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
         eventSubject.eraseToAnyPublisher()
     }
     
+    private let plugins: [PlayerPlugin]
+    
     // MARK: Life Cycle
     
-    init(errorMapper: ErrorMapper = ErrorMapper()) {
+    init(plugins: [PlayerPlugin], errorMapper: ErrorMapper = ErrorMapper()) {
         self.player = .init()
+        self.plugins = plugins
         self.errorMapper = errorMapper
         startObservingPlayer()
+        startAudioSession()
     }
     
     deinit {
@@ -41,13 +45,16 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
         let avPlayerItem = AVPlayerItem(url: playerItem.url)
         avPlayerItem.preferredForwardBufferDuration = playerItem.preferredForwardBufferDuration
         
+        if playerItem.url.pathExtension == "m3u8" {
+            avPlayerItem.preferredPeakBitRate = 0
+        }
+        
         player.replaceCurrentItem(with: avPlayerItem)
         broadcast(event: .state(.statusChanged(.loading)))
         observePlayerItem(avPlayerItem)
     }
     
     func play() {
-        startAudioSession()
         player.play()
     }
     
@@ -68,6 +75,7 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
     
     private func broadcast(event: PlayerEvent) {
         eventSubject.send(event)
+        plugins.forEach { $0.onEvent(event, engine: self) }
     }
     
     private func startAudioSession() {
@@ -79,8 +87,12 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
         #endif
     }
 
-    
     // MARK: Observers
+    private func startObservingPlayer() {
+        observePlayerStatus()
+        observePlaybackTime()
+        observePlaybackErrors()
+    }
 
     private func observePlayerItem(_ item: AVPlayerItem) {
         item.publisher(for: \.duration)
@@ -97,7 +109,8 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
         item.publisher(for: \.loadedTimeRanges)
             .sink { [weak self] ranges in
                 guard let self else { return }
-                guard let durationInSeconds = self.player.currentItem?.duration.seconds, !durationInSeconds.isNaN, durationInSeconds > 0 else { return }
+                guard let durationInSeconds = self.player.currentItem?.duration.seconds,
+                      !durationInSeconds.isNaN, durationInSeconds > 0 else { return }
                 
                 if let range = ranges.first?.timeRangeValue {
                     let buffered = (range.start.seconds + range.duration.seconds)  / durationInSeconds
@@ -105,12 +118,6 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    private func startObservingPlayer() {
-        observePlayerStatus()
-        observePlaybackTime()
-        observePlaybackErrors()
     }
     
     private func observePlayerStatus() {
@@ -129,7 +136,7 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
     
     private func observePlaybackTime() {
         let interval = CMTime(seconds: 0.2, preferredTimescale: 600)
-        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+        timeObserver = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             self?.broadcast(event: .state(.currentTimeChanged(time.seconds)))
         }
     }

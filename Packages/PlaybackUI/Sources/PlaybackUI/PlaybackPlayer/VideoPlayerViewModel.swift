@@ -34,6 +34,7 @@ final class VideoPlayerViewModel {
     init(url: URL, player: PlayerEngine) {
         self.player = player
         self.url = url
+        startObservingPlayer()
     }
     
     // MARK: Observers
@@ -81,6 +82,20 @@ final class VideoPlayerViewModel {
         }
     }
     
+    // MARK: Scrubbing
+    
+    func startScrubbing() {
+        isScrubbing = true
+    }
+    
+    func endScrubbing(at time: Double) {
+        Task {
+            await player.seek(to: time)
+            try? await Task.sleep(nanoseconds: 100_000_000)
+            isScrubbing = false
+        }
+    }
+    
     // MARK: Player Handling
     func load() {
         let item = PlayerItem(url: url)
@@ -90,7 +105,7 @@ final class VideoPlayerViewModel {
         player.play()
     }
     
-    func togglePause() {
+    func togglePlayPause() {
         if status == .playing {
             player.pause()
         } else {
