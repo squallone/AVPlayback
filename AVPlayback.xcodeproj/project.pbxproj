@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		58732BE42F02396E00A7657E /* AppFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 58732BE32F02396E00A7657E /* AppFoundation */; };
+		58732BE72F02436B00A7657E /* PlaybackKit in Frameworks */ = {isa = PBXBuildFile; productRef = 58732BE62F02436B00A7657E /* PlaybackKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		58732B9E2F0209E900A7657E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58732BE72F02436B00A7657E /* PlaybackKit in Frameworks */,
+				58732BE42F02396E00A7657E /* AppFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +119,8 @@
 			);
 			name = AVPlayback;
 			packageProductDependencies = (
+				58732BE32F02396E00A7657E /* AppFoundation */,
+				58732BE62F02436B00A7657E /* PlaybackKit */,
 			);
 			productName = AVPlayback;
 			productReference = 58732B902F0209E700A7657E /* AVPlayback.app */;
@@ -195,6 +204,10 @@
 			);
 			mainGroup = 58732B872F0209E700A7657E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				58732BE22F02396E00A7657E /* XCLocalSwiftPackageReference "Packages/AppFoundation" */,
+				58732BE52F02436B00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 58732B912F0209E700A7657E /* Products */;
 			projectDirPath = "";
@@ -605,6 +618,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		58732BE22F02396E00A7657E /* XCLocalSwiftPackageReference "Packages/AppFoundation" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/AppFoundation;
+		};
+		58732BE52F02436B00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/PlaybackKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		58732BE32F02396E00A7657E /* AppFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppFoundation;
+		};
+		58732BE62F02436B00A7657E /* PlaybackKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaybackKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58732B882F0209E700A7657E /* Project object */;
 }
