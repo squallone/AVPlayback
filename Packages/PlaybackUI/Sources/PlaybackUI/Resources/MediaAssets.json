@@ -1,0 +1,326 @@
+[
+  {
+    "title": "ABC 3 Kirksville",
+    "url": "https://cvtv.cvalley.net/hls/KTVOABC/KTVOABC.m3u8"
+  },
+  {
+    "title": "ABC 7 New York",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=173034&extension=ts&play_token=s3HnACs6Kk"
+  },
+  {
+    "title": "ABC 9 Kansas City",
+    "url": "https://cvtv.cvalley.net/hls/KMBCABC/KMBCABC.m3u8"
+  },
+  {
+    "title": "ABC 10 Miami (#)",
+    "url": "http://fl1.moveonjoy.com/ABC_EAST/index.m3u8"
+  },
+  {
+    "title": "ABC 17 Missouri",
+    "url": "https://cvtv.cvalley.net/hls/KMIZABC/KMIZABC.m3u8"
+  },
+  {
+    "title": "ABC 28 Tampa, Florida",
+    "url": "https://fl1.moveonjoy.com/FL_Tampa_ABC/index.m3u8"
+  },
+  {
+    "title": "Buzzr",
+    "url": "https://fl1.moveonjoy.com/Buzzr/index.m3u8"
+  },
+  {
+    "title": "CBS 2 Los Angeles",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=173138&extension=ts&play_token=bjdc6NOz9U"
+  },
+  {
+    "title": "CBS 2 New York",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=173249&extension=ts&play_token=wCZStT19yS"
+  },
+  {
+    "title": "CBS 3 Kirksville",
+    "url": "https://cvtv.cvalley.net/hls/KTVOCBS/KTVOCBS.m3u8"
+  },
+  {
+    "title": "CBS 5 Kansas City",
+    "url": "https://cvtv.cvalley.net/hls/KCTVCBS/KCTVCBS.m3u8"
+  },
+  {
+    "title": "CBS 12 West Palm Beach, Florida",
+    "url": "https://fl1.moveonjoy.com/FL_West_Palm_Beach_CBS/index.m3u8"
+  },
+  {
+    "title": "CBS 13 Jefferson City",
+    "url": "https://cvtv.cvalley.net/hls/KRCGCBS/KRCGCBS.m3u8"
+  },
+  {
+    "title": "CW 8 Columbia",
+    "url": "https://cvtv.cvalley.net/hls/KOMUCW/KOMUCW.m3u8"
+  },
+  {
+    "title": "CW 11 New York",
+    "url": "https://e1.thetvapp.to/hls/WPIX/index.m3u8"
+  },
+  {
+    "title": "CW 15 Ottawa",
+    "url": "https://cvtv.cvalley.net/hls/KYOUDT4/KYOUDT4.m3u8"
+  },
+  {
+    "title": "CW 18 Clemont, Florida",
+    "url": "https://dvrfl03.bozztv.com/hondu-lxnews/index.m3u8"
+  },
+  {
+    "title": "CW 18 Orlando, Florida",
+    "url": "https://fl1.moveonjoy.com/CW_ORLANDO/index.m3u8"
+  },
+  {
+    "title": "CW 29 Kansas City",
+    "url": "https://cvtv.cvalley.net/hls/KCWECW/KCWECW.m3u8"
+  },
+  {
+    "title": "CW 44 Tampa Bay, Florida",
+    "url": "https://fl1.moveonjoy.com/FL_Tampa_CW44/index.m3u8"
+  },
+  {
+    "title": "FOX 4 Kansas City",
+    "url": "https://cvtv.cvalley.net/hls/WDAFFox/WDAFFox.m3u8"
+  },
+  {
+    "title": "FOX 5 Atlanta",
+    "url": "https://dvrfl03.bozztv.com/hondu/hondu-rick-fox5/index.m3u8"
+  },
+  {
+    "title": "FOX 5 New York",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=173728&extension=ts&play_token=yqh6JZisew"
+  },
+  {
+    "title": "FOX 22 Columbia",
+    "url": "https://cvtv.cvalley.net/hls/KQFXFOX/KQFXFOX.m3u8"
+  },
+  {
+    "title": "FOX 29 West Palm Beach, Florida",
+    "url": "https://fl1.moveonjoy.com/FL_West_Palm_Beach_FOX/index.m3u8"
+  },
+  {
+    "title": "Game Show Central",
+    "url": "http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62e90e8cb05d2b0007f10a61/master.m3u8"
+  },
+  {
+    "title": "Game Show Network",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=45553&extension=ts&play_token=HyBnGSN6R3"
+  },
+  {
+    "title": "Game TV",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=45472&extension=ts&play_token=rBbxZgOmlj"
+  },
+  {
+    "title": "Me TV Kansas City",
+    "url": "https://cvtv.cvalley.net/hls/KMBCMeTV/KMBCMeTV.m3u8"
+  },
+  {
+    "title": "Me TV Missouri",
+    "url": "https://cvtv.cvalley.net/hls/KMIZMeTV/KMIZMeTV.m3u8"
+  },
+  {
+    "title": "My Zou Missouri",
+    "url": "https://cvtv.cvalley.net/hls/KZOUMYZOU/KZOUMYZOU.m3u8"
+  },
+  {
+    "title": "NBC 4 Los Angeles",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=173924&extension=ts&play_token=akWpDuCN7l"
+  },
+  {
+    "title": "NBC 4 New York",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=174038&extension=ts&play_token=eC1CCKlUzm"
+  },
+  {
+    "title": "NBC 4 New York (#)",
+    "url": "https://e1.thetvapp.to/hls/WNBCDT1/tracks-v1a1/mono.m3u8"
+  },
+  {
+    "title": "NBC 4 New York (#) (alt)",
+    "url": "https://fl61.moveonjoy.com/NY_New_York_NBC/tracks-v1a1/mono.ts.m3u8"
+  },
+  {
+    "title": "NBC 6 Miami",
+    "url": "https://fl1.moveonjoy.com/FL_Miami_NBC/index.m3u8"
+  },
+  {
+    "title": "NBC 8 Columbia",
+    "url": "https://cvtv.cvalley.net/hls/KOMUNBC/KOMUNBC.m3u8"
+  },
+  {
+    "title": "NBC 8 Tampa, Florida",
+    "url": "https://fl1.moveonjoy.com/FL_Tampa_NBC/index.m3u8"
+  },
+  {
+    "title": "NBC Comedy Vault",
+    "url": "https://xumo-xumoent-vc-105-z0vpm.fast.nbcuni.com/live/master.m3u8"
+  },
+  {
+    "title": "NBC LX",
+    "url": "https://nbculocallive.akamaized.net/hls/live/2037096/lx/use1.m3u8"
+  },
+  {
+    "title": "NBC Universo West",
+    "url": "http://190.11.225.124:5000/live/universo_hd/playlist.m3u8"
+  },
+  {
+    "title": "PBS 39 Allentown, Pennsylvania",
+    "url": "https://dvrfl03.bozztv.com/hondu/hondu-gbp-pbs/index.m3u8"
+  },
+  {
+    "title": "PBS Kansas City",
+    "url": "https://cvtv.cvalley.net/hls/KCPTPBS/KCPTPBS.m3u8"
+  },
+  {
+    "title": "PBS Kentucky",
+    "url": "https://2-fss-2.streamhoster.com/pl_132/amlst:200914-1315486/playlist.m3u8"
+  },
+  {
+    "title": "PBS Kentucky 2",
+    "url": "https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1315484/playlist.m3u8"
+  },
+  {
+    "title": "PBS Missouri",
+    "url": "https://cvtv.cvalley.net/hls/KMOSPBS/KMOSPBS.m3u8"
+  },
+  {
+    "title": "PBS San Diego",
+    "url": "https://2-fss-1.streamhoster.com/pl_134/amlst:200914-1282960/chunklist.m3u8"
+  },
+  {
+    "title": "PBS Create",
+    "url": "https://2-fss-1.streamhoster.com/pl_122/amlst:201814-2122456/playlist.m3u8"
+  },
+  {
+    "title": "PBS KET Owensboro, Kentucky",
+    "url": "https://dvrfl03.bozztv.com/hondu/hondu-pbs-kids/index.m3u8"
+  },
+  {
+    "title": "PBS Kids",
+    "url": "https://2-fss-2.streamhoster.com/pl_140/amlst:200914-1298290/playlist.m3u8"
+  },
+  {
+    "title": "PBS Kids (alt)",
+    "url": "https://livestream.pbskids.org/out/v1/14507d931bbe48a69287e4850e53443c/est.m3u8"
+  },
+  {
+    "title": "PBS Kids Alaska",
+    "url": "https://livestream.pbskids.org/out/v1/94b88ad58fc14f84a9382341f1c00b82/akst.m3u8"
+  },
+  {
+    "title": "PBS Kids Hawaii",
+    "url": "https://livestream.pbskids.org/out/v1/aa31792fee094b24b09045483f04d150/hast.m3u8"
+  },
+  {
+    "title": "PBS Kids Mountain",
+    "url": "https://livestream.pbskids.org/out/v1/3fe3030a2c8045a3932f4289d9eba3e6/mst.m3u8"
+  },
+  {
+    "title": "PBS Kids Pacific",
+    "url": "https://livestream.pbskids.org/out/v1/11f2e6b73eaa4887b3746cb863960e79/pst.m3u8"
+  },
+  {
+    "title": "TBS East",
+    "url": "http://m.devtv.biz:80/play/live.php?mac=00:1A:79:33:55:98&stream=47289&extension=ts"
+  },
+  {
+    "title": "TCM East",
+    "url": "http://143.244.60.30/TCM/index.m3u8"
+  },
+  {
+    "title": "TNT East",
+    "url": "http://m.devtv.biz:80/play/live.php?mac=00:1A:79:33:55:98&stream=47311&extension=ts"
+  },
+  {
+    "title": "VoA TV Africa",
+    "url": "https://voa-ingest.akamaized.net/hls/live/2033874/tvmc06/playlist.m3u8"
+  },
+  {
+    "title": "VoA TV Persian",
+    "url": "https://voa-ingest.akamaized.net/hls/live/2033876/tvmc07/playlist.m3u8"
+  },
+  {
+    "title": "Galavision East",
+    "url": "http://tv.nstvlatino.com:8080/live/Mitv2462/I8G5FfZBMw/3793.m3u8"
+  },
+  {
+    "title": "Telemundo 31 Orlando, Florida",
+    "url": "https://dvrfl03.bozztv.com/hondu-telexitos/index.m3u8"
+  },
+  {
+    "title": "Telemundo 47 New York",
+    "url": "https://e5.thetvapp.to/hls/TelemundoEast/index.m3u8"
+  },
+  {
+    "title": "Telemundo East",
+    "url": "https://cdn.igocast.com/wkrp_channel1_hls/wkrp_channel1_master.m3u8"
+  },
+  {
+    "title": "Telemundo Accion",
+    "url": "https://xumo-drct-ch835-ekq0p.fast.nbcuni.com/live/master.m3u8"
+  },
+  {
+    "title": "Telemundo Al Dia",
+    "url": "https://d1rqgw5gocwo9i.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-nbcu-stitched/10a44c37-f976-4d2b-ab23-8637a7a094ca/3.m3u8"
+  },
+  {
+    "title": "Telemundo Noticias Ahora",
+    "url": "https://xumo-xumoent-ch827-uj0ch.fast.nbcuni.com/live/master.m3u8"
+  },
+  {
+    "title": "Telemundo Noticias California",
+    "url": "https://amg00884-nbcuniversal-nbctelemundowest-xumo-xc0n5.amagi.tv/playlist.m3u8"
+  },
+  {
+    "title": "Telemundo Noticias Florida",
+    "url": "https://amg00884-nbcuniversal-nbctelemundoflorida-xumo-atn0m.amagi.tv/playlist.m3u8"
+  },
+  {
+    "title": "Telemundo Noticias Noreste",
+    "url": "https://amg00884-nbcuniversal-nbctelemundonortheast-xumo-ok3ha.amagi.tv/playlist.m3u8"
+  },
+  {
+    "title": "Telemundo Noticias Texas",
+    "url": "https://amg00884-nbcuniversal-nbctelemundotexas-xumo-eeb56.amagi.tv/playlist.m3u8"
+  },
+  {
+    "title": "Telemundo Romance",
+    "url": "https://xumo-drct-ch836-57aiq.fast.nbcuni.com/live/master.m3u8"
+  },
+  {
+    "title": "AFN Family/Pulse",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118462"
+  },
+  {
+    "title": "AFN Movie",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118463"
+  },
+  {
+    "title": "AFN News",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118464"
+  },
+  {
+    "title": "AFN Prime Atlantic",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118465"
+  },
+  {
+    "title": "AFN Prime Pacific",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118466"
+  },
+  {
+    "title": "AFN Spectrum",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118467"
+  },
+  {
+    "title": "AFN Sports",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118468"
+  },
+  {
+    "title": "AFN Sports (#)",
+    "url": "http://technologycloud.eu:80/play/live.php?mac=00:1A:79:84:B7:7B&stream=1099330&extension=ts&play_token=84BjPKYGAl"
+  },
+  {
+    "title": "AFN Sports 2",
+    "url": "http://lunar.pm:8080/RandyJ2/randy/118469"
+  }
+]

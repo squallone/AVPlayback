@@ -222,7 +222,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				58732BE22F02396E00A7657E /* XCLocalSwiftPackageReference "Packages/AppFoundation" */,
-				58732BE52F02436B00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackKit" */,
 				58732BEE2F038D5D00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackUI" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -662,10 +661,6 @@
 		58732BE22F02396E00A7657E /* XCLocalSwiftPackageReference "Packages/AppFoundation" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/AppFoundation;
-		};
-		58732BE52F02436B00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/PlaybackKit;
 		};
 		58732BEE2F038D5D00A7657E /* XCLocalSwiftPackageReference "Packages/PlaybackUI" */ = {
 			isa = XCLocalSwiftPackageReference;

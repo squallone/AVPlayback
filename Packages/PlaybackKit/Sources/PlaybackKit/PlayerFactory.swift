@@ -7,8 +7,18 @@
 
 import Foundation
 
-public struct PlayerFactory {
-    public static func make() -> PlayerEngine {
-        AVPlaybackPlayerEngine(plugins: [DebuggerPlugin()])
+public protocol PlayerBulding {
+    func makePlayer() -> PlayerEngine
+}
+
+public struct PlayerFactory: PlayerBulding {
+    public init() {}
+    public func makePlayer() -> PlayerEngine {
+        AVPlaybackPlayerEngine(
+            plugins: [
+                DebuggerPlugin()
+            ],
+            sessionConfiguration: PlaybackSessionConfiguration(allowsBackgroundPlayback: true)
+        )
     }
 }

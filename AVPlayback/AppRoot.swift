@@ -8,12 +8,14 @@
 import SwiftUI
 import PlaybackUI
 
-struct ContentView: View {
+struct AppRoot: View {
     var body: some View {
-        VideoPlayerFactory.makeVideoPlayer(url: URL(string: "http://23.237.104.106:8080/USA_CBS_SPORTS/index.m3u8")!)
+        NavigationStack {
+            PlaybackMediaListView()
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    AppRoot()
 }

@@ -7,17 +7,35 @@
 
 import Foundation
 import PlaybackKit
+import SwiftUI
 
 @MainActor
-public struct VideoPlayerFactory {
-    public static func makeVideoPlayer(url: URL) -> VideoPlayerView {
-        VideoPlayerView(viewModel: makeViewModel(url: url))
+public protocol VideoPlayerBuilding {
+    @ViewBuilder func makePlayer(asset: MediaAsset) -> VideoPlayerView
+}
+
+@MainActor
+public struct VideoPlayerFactory: VideoPlayerBuilding {
+    
+    private let playerFactory: PlayerBulding
+    
+    public init(playerFactory: PlayerBulding = PlayerFactory()) {
+        self.playerFactory = playerFactory
     }
     
-    static func makeViewModel(url: URL) -> VideoPlayerViewModel {
+    public func makePlayer(asset: MediaAsset) -> VideoPlayerView {
+        VideoPlayerView(viewModel: makeViewModel(url: asset.source.url))
+
+    }
+    
+    func makeViewModel(url: URL) -> VideoPlayerViewModel {
         VideoPlayerViewModel(
-            url: url,
-            player: PlayerFactory.make()
+            asset: MediaAsset(
+                source: PlaybackSource(url: url, isLive: true),
+                metadata: MediaAsset.Metadata(title: "Test", description: nil, duration: nil),
+                playback: PlaybackOptions()
+            ),
+            player: playerFactory.makePlayer()
         )
     }
 }

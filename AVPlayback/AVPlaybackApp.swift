@@ -11,7 +11,7 @@ import SwiftUI
 struct AVPlaybackApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppRoot()
         }
     }
 }

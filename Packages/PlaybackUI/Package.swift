@@ -30,6 +30,9 @@ let package = Package(
                     name: "PlaybackKit",
                     package: "PlaybackKit"
                 )
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(

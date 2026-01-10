@@ -9,9 +9,9 @@ import Foundation
 
 public struct PlayerError: Error {
     let id = UUID()
-    let category: Category
-    let message: String
-    let originalError: NSError?
+    public let category: Category
+    public let message: String
+    public let originalError: NSError?
 }
 
 public extension PlayerError {
@@ -21,5 +21,15 @@ public extension PlayerError {
         case unknown
         case resource
         case authentication
+    }
+    
+    public var userFriendlyMessage: String {
+        switch category {
+        case .network: return "We are having trouble connecting to the internet."
+        case .decoding: return "We cannot play this video format."
+        case .authentication: return "You do not have permission to watch this."
+        case .resource: return "This video is currently unavailable."
+        case .unknown: return "Something went wrong. Please try again."
+        }
     }
 }

@@ -22,13 +22,19 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
     }
     
     private let plugins: [PlayerPlugin]
-    
+    private let sessionConfiguration: PlaybackSessionConfiguration
+
     // MARK: Life Cycle
     
-    init(plugins: [PlayerPlugin], errorMapper: ErrorMapper = ErrorMapper()) {
+    init(
+        plugins: [PlayerPlugin],
+        errorMapper: ErrorMapper = ErrorMapper(),
+        sessionConfiguration: PlaybackSessionConfiguration
+    ) {
         self.player = .init()
         self.plugins = plugins
         self.errorMapper = errorMapper
+        self.sessionConfiguration = sessionConfiguration
         startObservingPlayer()
         startAudioSession()
     }
@@ -42,10 +48,10 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
     // MARK: PlayerEngine Methods
     
     func load(item playerItem: PlayerItem) {
-        let avPlayerItem = AVPlayerItem(url: playerItem.url)
-        avPlayerItem.preferredForwardBufferDuration = playerItem.preferredForwardBufferDuration
+        let avPlayerItem = AVPlayerItem(url: playerItem.source.url)
+        avPlayerItem.preferredForwardBufferDuration = playerItem.options.prefferedForwardBufferDuration
         
-        if playerItem.url.pathExtension == "m3u8" {
+        if playerItem.source.url.pathExtension == "m3u8" {
             avPlayerItem.preferredPeakBitRate = 0
         }
         
@@ -150,16 +156,16 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
                 if let error = self.player.currentItem?.error {
                     let mapped = errorMapper.map(error)
                     broadcast(event: .error(mapped))
-
                 }
             }
-        
+            .store(in: &cancellables)
+
         NotificationCenter.default.publisher(for: .AVPlayerItemFailedToPlayToEndTime)
-            .compactMap { notification -> PlayerError? in
+            .compactMap { [weak self]  notification -> PlayerError? in
                 guard let error = notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey] as? Error else {
                     return nil
                 }
-                return self.errorMapper.map(error)
+                return self?.errorMapper.map(error)
             }
             .sink { [weak self] error in
                 self?.broadcast(event: .error(error))
@@ -170,9 +176,9 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
             .compactMap { notification -> AVPlayerItem? in
                 return notification.object as? AVPlayerItem
             }
-            .compactMap { item -> PlayerError? in
+            .compactMap { [weak self] item -> PlayerError? in
                 guard let event = item.errorLog()?.events.last else { return nil }
-                return self.errorMapper.map(logEvent: event)
+                return self?.errorMapper.map(logEvent: event)
             }
             .sink { [weak self] error in
                 self?.broadcast(event: .error(error))

@@ -28,12 +28,12 @@ final class VideoPlayerViewModel {
     @ObservationIgnored
     private var isScrubbing = false
     @ObservationIgnored
-    private let url: URL
+    private let asset: MediaAsset
     
     // MARK: Initialization
-    init(url: URL, player: PlayerEngine) {
+    init(asset: MediaAsset, player: PlayerEngine) {
         self.player = player
-        self.url = url
+        self.asset = asset
         startObservingPlayer()
     }
     
@@ -98,7 +98,10 @@ final class VideoPlayerViewModel {
     
     // MARK: Player Handling
     func load() {
-        let item = PlayerItem(url: url)
+        let item = PlayerItem(
+            source: PlaybackSource(url: asset.source.url, isLive: true, drm: nil),
+            options: PlaybackOptions()
+        )
         self.currentItem = item
         
         player.load(item: item)

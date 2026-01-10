@@ -10,10 +10,10 @@ import SwiftUI
 
 public struct VideoPlayerView: View {
     
-    @State private var viewModel: VideoPlayerViewModel
+    private let viewModel: VideoPlayerViewModel
     
     init(viewModel: VideoPlayerViewModel) {
-        _viewModel = State(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
     
     public var body: some View {
@@ -22,6 +22,12 @@ public struct VideoPlayerView: View {
             
             VideoPlayerSurface(player: viewModel.player)
                 .ignoresSafeArea()
+            
+            if let error = viewModel.activeError {
+                VideoPlayerErrorOverlay(error: error) {
+                    viewModel.load()
+                }
+            }
             
             VStack {
                 HStack {
@@ -51,12 +57,12 @@ public struct VideoPlayerView: View {
                 )
             }
         }
-        .onAppear {
+        .task {
             viewModel.load()
         }
     }
 }
 
 #Preview {
-    VideoPlayerView(viewModel: VideoPlayerFactory.makeViewModel(url: URL(string: "http://23.237.104.106:8080/USA_CBS_SPORTS/index.m3u8")!))
+    //VideoPlayerView(viewModel: VideoPlayerFactory.makeViewModel(url: URL(string: "http://23.237.104.106:8080/USA_CBS_SPORTS/index.m3u8")!))
 }

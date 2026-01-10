@@ -8,20 +8,26 @@
 import Foundation
 import AVFoundation
 
-struct ErrorMapper {
+public struct ErrorMapper {
     
     private let strategies: [ErrorMappingStrategy]
     
-    init(strategies: [ErrorMappingStrategy] = [
+    private static let defaultStragies: [ErrorMappingStrategy] = [
         NetworkErrorStrategy(),
         AVFoundationErrorStrategy(),
         ResourceErrorStrategy(),
         CoreMediaErrorStrategy()
-    ]) {
+    ]
+    
+    public init() {
+        self.init(strategies: Self.defaultStragies)
+    }
+    
+    init(strategies: [ErrorMappingStrategy]) {
         self.strategies = strategies
     }
     
-    func map(_ error: Error?) -> PlayerError {
+    public func map(_ error: Error?) -> PlayerError {
         guard let error else {
             return PlayerError(category: .unknown, message: "Unknown error occurred", originalError: nil)
         }

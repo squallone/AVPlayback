@@ -8,14 +8,13 @@
 import Foundation
 
 public struct PlayerItem: Sendable, Equatable {
-    public let url: URL
-    public let preferredForwardBufferDuration: TimeInterval
+    public let source: PlaybackSource
+    public let options: PlaybackOptions
+    public let drm: DRM?
     
-    public init(
-        url: URL,
-        preferredForwardBufferDuration: TimeInterval = 10.0,
-    ) {
-        self.url = url
-        self.preferredForwardBufferDuration = preferredForwardBufferDuration
+    public init(source: PlaybackSource, options: PlaybackOptions, drm: DRM? = nil) {
+        self.source = source
+        self.options = options
+        self.drm = drm
     }
 }
