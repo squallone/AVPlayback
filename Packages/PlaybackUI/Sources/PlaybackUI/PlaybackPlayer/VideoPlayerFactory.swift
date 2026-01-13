@@ -24,15 +24,25 @@ public struct VideoPlayerFactory: VideoPlayerBuilding {
     }
     
     public func makePlayer(asset: MediaAsset) -> VideoPlayerView {
-        VideoPlayerView(viewModel: makeViewModel(url: asset.source.url))
-
+        VideoPlayerView(
+            viewModel: makeViewModel(asset: asset)
+        )
     }
-    
-    func makeViewModel(url: URL) -> VideoPlayerViewModel {
+}
+
+extension VideoPlayerFactory {
+    func makeViewModel(asset: MediaAsset) -> VideoPlayerViewModel {
         VideoPlayerViewModel(
             asset: MediaAsset(
-                source: PlaybackSource(url: url, isLive: true),
-                metadata: MediaAsset.Metadata(title: "Test", description: nil, duration: nil),
+                source: PlaybackSource(
+                    url: asset.source.url,
+                    isLive: asset.source.isLive
+                ),
+                metadata: MediaAsset.Metadata(
+                    title: asset.metadata.title,
+                    description: nil,
+                    duration: nil
+                ),
                 playback: PlaybackOptions()
             ),
             player: playerFactory.makePlayer()

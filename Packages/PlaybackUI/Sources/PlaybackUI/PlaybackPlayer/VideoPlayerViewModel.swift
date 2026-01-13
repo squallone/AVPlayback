@@ -28,7 +28,7 @@ final class VideoPlayerViewModel {
     @ObservationIgnored
     private var isScrubbing = false
     @ObservationIgnored
-    private let asset: MediaAsset
+    let asset: MediaAsset
     
     // MARK: Initialization
     init(asset: MediaAsset, player: PlayerEngine) {

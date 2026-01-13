@@ -41,3 +41,16 @@ extension MediaAsset {
     }
 }
 
+extension MediaAsset {
+    static func stub() -> MediaAsset {
+        MediaAsset(
+            source: PlaybackSource(
+                url: URL("http://example.com/video.mp4")!,
+                isLive: true
+            ),
+            metadata: MediaAsset.Metadata(title: "NBC News"),
+            playback: PlaybackOptions()
+        )
+    }
+}
+

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  AVPlaybackPlayerEngine.swift
 //  PlaybackKit
 //
 //  Created by Abdiel Soto on 12/29/25.
@@ -191,9 +191,7 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
     func handleStatusChange(_ status: AVPlayer.TimeControlStatus) {
         switch status {
         case .paused:
-            if player.currentItem?.status == .readyToPlay {
-                broadcast(event: .state(.statusChanged(.buffering)))
-            }
+            broadcast(event: .state(.statusChanged(.paused)))
         case .playing:
             broadcast(event: .state(.statusChanged(.playing)))
         case .waitingToPlayAtSpecifiedRate:

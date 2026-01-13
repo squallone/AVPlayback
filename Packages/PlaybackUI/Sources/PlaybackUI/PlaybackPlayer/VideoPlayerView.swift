@@ -9,8 +9,12 @@ import Foundation
 import SwiftUI
 
 public struct VideoPlayerView: View {
+    @Environment(\.dismiss) private var dismiss
     
     private let viewModel: VideoPlayerViewModel
+    
+    @State private var areControlsVisible: Bool = true
+    @State private var hideTimer: Timer?
     
     init(viewModel: VideoPlayerViewModel) {
         self.viewModel = viewModel
@@ -22,47 +26,65 @@ public struct VideoPlayerView: View {
             
             VideoPlayerSurface(player: viewModel.player)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    toggleControls()
+                }
             
             if let error = viewModel.activeError {
                 VideoPlayerErrorOverlay(error: error) {
                     viewModel.load()
                 }
+                .transition(.opacity)
             }
             
-            VStack {
-                HStack {
-                    Text("Example")
-                        .foregroundColor(.white)
-                        .padding()
-                    
-                    Spacer()
-                    
-                    if viewModel.status == .buffering || viewModel.status == .loading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            .padding()
+            if areControlsVisible {
+                PlayerControls(viewModel: viewModel) { isInteracting in
+                    if isInteracting {
+                        cancelHideTimer()
+                    } else {
+                        scheduleHideTimer()
                     }
+                } onDismiss: {
+                    dismiss()
                 }
-                
-                Spacer()
-                
-                PlayerControls(
-                    status: viewModel.status,
-                    currentTime: viewModel.currentTime,
-                    duration: viewModel.duration,
-                    buffer: viewModel.bufferProgress,
-                    onPlayPause: viewModel.togglePlayPause,
-                    onScrubStart: viewModel.startScrubbing,
-                    onScrubEnd: viewModel.endScrubbing
-                )
+                .transition(.opacity.animation(.easeInOut(duration: 0.2)))
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
         .task {
             viewModel.load()
+            scheduleHideTimer()
         }
+    }
+    
+    private func toggleControls() {
+        withAnimation {
+            areControlsVisible.toggle()
+        }
+        
+        if areControlsVisible {
+            scheduleHideTimer()
+        } else {
+            cancelHideTimer()
+        }
+    }
+    
+    private func scheduleHideTimer() {
+        cancelHideTimer()
+        hideTimer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { _ in
+            withAnimation {
+                areControlsVisible = false
+            }
+        }
+    }
+    
+    private func cancelHideTimer() {
+        hideTimer?.invalidate()
+        hideTimer = nil
     }
 }
 
 #Preview {
-    //VideoPlayerView(viewModel: VideoPlayerFactory.makeViewModel(url: URL(string: "http://23.237.104.106:8080/USA_CBS_SPORTS/index.m3u8")!))
+    VideoPlayerView(viewModel: VideoPlayerFactory().makeViewModel(asset: .stub()))
 }
