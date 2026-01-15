@@ -12,7 +12,7 @@ import SwiftUI
 
 final class PlayerLayerView: NativeView {
     
-    let player: PlayerEngine
+    private var currentMode: VideoScaleMode
     
 #if !os(macOS)
     override class var layerClass: AnyClass {
@@ -24,8 +24,8 @@ final class PlayerLayerView: NativeView {
         layer as? AVPlayerLayer
     }
     
-    init(player: PlayerEngine) {
-        self.player = player
+    init(player: PlayerEngine, mode: VideoScaleMode) {
+        self.currentMode = mode
         super.init(frame: .zero)
         
         guard let provider = player as? AVPlayerProvider else {
@@ -35,43 +35,69 @@ final class PlayerLayerView: NativeView {
 #if os(macOS)
         // macOS: Views are not layer-backed by default
         // We must create the layer manually and set wantsLayer
-        let layer = AVPlayerLayer(player: provider.player)
-        layer.videoGravity = .resizeAspectFill
-        self.layer = layer
+        let playerLayer = AVPlayerLayer(player: provider.player)
+        playerLayer.videoGravity = mode == .fit ? .resizeAspect : .resizeAspectFill
+        playerLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        self.layer = playerLayer
         wantsLayer = true
 #else
         playerLayer?.player = provider.player
-        playerLayer?.videoGravity = .resizeAspectFill
 #endif
-        self.playerLayer?.videoGravity = .resizeAspectFill
+        applyMode(mode)
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: Public
+    
+    func update(mode: VideoScaleMode) {
+        guard mode != self.currentMode else {
+            return
+        }
+        
+        currentMode = mode
+        
+#if os(iOS)
+        UIView.animate(withDuration: 0.25) {
+            self.applyMode(mode)
+        }
+#else
+        applyMode(mode)
+#endif
+    }
+    
+    // MARK: Private
+    
+    private func applyMode(_ mode: VideoScaleMode) {
+        let gravity: AVLayerVideoGravity = mode == .fit ? .resizeAspect : .resizeAspectFill
+        playerLayer?.videoGravity = gravity
+    }
 }
 
 struct VideoPlayerSurface: NativeViewRepresentable {
     let player: PlayerEngine
+    let mode: VideoScaleMode
     
 #if os(macOS)
-    func makeNSView(context: Context) -> NSView {
-        PlayerLayerView(player: player)
+    func makeNSView(context: Context) -> PlayerLayerView {
+        PlayerLayerView(player: player, mode: mode)
     }
     
-    func updateNSView(_ nsView: NSView, context: Context) {
-        
+    func updateNSView(_ nsView: PlayerLayerView, context: Context) {
+        nsView.update(mode: mode)
     }
 #endif
     
 #if os(iOS) || os(tvOS)
-    func makeUIView(context: Context) -> UIView {
-        PlayerLayerView(player: player)
+    func makeUIView(context: Context) -> PlayerLayerView {
+        PlayerLayerView(player: player, mode: mode)
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
-        
+    func updateUIView(_ uiView: PlayerLayerView, context: Context) {
+        uiView.update(mode: mode)
     }
 #endif
 }

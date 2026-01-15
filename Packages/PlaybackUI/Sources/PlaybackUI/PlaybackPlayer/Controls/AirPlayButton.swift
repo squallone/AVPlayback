@@ -5,9 +5,10 @@
 //  Created by Abdiel Soto on 1/12/26.
 //
 
+#if os(iOS)
+
 import SwiftUI
 import AVKit
-
 struct AirPlayButton: UIViewRepresentable {
     func makeUIView(context: Context) -> some UIView {
         let picker = AVRoutePickerView()
@@ -23,3 +24,5 @@ struct AirPlayButton: UIViewRepresentable {
 #Preview {
     AirPlayButton()
 }
+
+#endif

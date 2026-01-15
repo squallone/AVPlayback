@@ -21,6 +21,13 @@ final class VideoPlayerViewModel {
     var currentItem: PlayerItem?
     var activeError: PlayerError?
     
+    var scaleMode: VideoScaleMode = .fill
+    var videoSize: CGSize = .zero
+    var videoAspectRatio: CGFloat {
+        guard videoSize.height > 0 else { return 16/9 }
+        return videoSize.width / videoSize.height
+    }
+    
     @ObservationIgnored
     private(set) var player: PlayerEngine
     @ObservationIgnored
@@ -54,6 +61,8 @@ final class VideoPlayerViewModel {
         switch event {
         case .state(let stateChange):
             handleStateChange(stateChange)
+        case .videoSizeChanged(let size):
+            self.videoSize = size
         case .error(let error):
             self.activeError = error
             
@@ -80,6 +89,12 @@ final class VideoPlayerViewModel {
         case .rateChanged(_):
             break
         }
+    }
+    
+    // MARK: Scale Mode
+    
+    func toggleScaleMode() {
+        scaleMode = scaleMode == .fit ? .fill : .fit
     }
     
     // MARK: Scrubbing

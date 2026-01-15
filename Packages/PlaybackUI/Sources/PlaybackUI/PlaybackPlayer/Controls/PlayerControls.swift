@@ -137,9 +137,10 @@ struct PlayerControls: View {
                         .font(.title3)
                         .foregroundStyle(.white)
                 }
-                
+                #if os(iOS)
                 AirPlayButton()
                     .frame(width: 30, height: 30)
+                #endif
             }
         }
         .padding(.horizontal)

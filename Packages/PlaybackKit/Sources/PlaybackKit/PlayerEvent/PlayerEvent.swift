@@ -11,5 +11,6 @@ public enum PlayerEvent {
     case state(PlayerStateChange)
     case lifecycle(LifecycleEvent)
     case diagnostics
+    case videoSizeChanged(CGSize)
     case error(PlayerError)
 }

@@ -24,11 +24,19 @@ public struct VideoPlayerView: View {
         ZStack {
             Color.black.ignoresSafeArea()
             
-            VideoPlayerSurface(player: viewModel.player)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    toggleControls()
+            VideoPlayerSurface(
+                player: viewModel.player,
+                mode: viewModel.scaleMode
+            )
+            .ignoresSafeArea(edges: .vertical)
+            .onTapGesture {
+                toggleControls()
+            }
+            .onTapGesture(count: 2) {
+                withAnimation {
+                    viewModel.toggleScaleMode()
                 }
+            }
             
             if let error = viewModel.activeError {
                 VideoPlayerErrorOverlay(error: error) {
@@ -49,9 +57,26 @@ public struct VideoPlayerView: View {
                 }
                 .transition(.opacity.animation(.easeInOut(duration: 0.2)))
             }
+            
+            VStack {
+                Spacer()
+                if viewModel.videoSize != .zero {
+                    Text("Res: \(Int(viewModel.videoSize.width))x\(Int(viewModel.videoSize.height))")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.6))
+                        .padding(.bottom, 50)
+                }
+            }
         }
+#if os(iOS)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
+#elseif os(macOS)
+        // Hides the back button area completely
+        .toolbar(.hidden, for: .windowToolbar)
+        // Hides the navigation title area
+        .navigationTitle("")
+#endif
         .task {
             viewModel.load()
             scheduleHideTimer()
@@ -88,3 +113,4 @@ public struct VideoPlayerView: View {
 #Preview {
     VideoPlayerView(viewModel: VideoPlayerFactory().makeViewModel(asset: .stub()))
 }
+

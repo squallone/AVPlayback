@@ -124,6 +124,15 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
                 }
             }
             .store(in: &cancellables)
+        
+        item.publisher(for: \.presentationSize)
+            .receive(on: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] size in
+                guard let self = self, size != .zero else { return }
+                self.broadcast(event: .videoSizeChanged(size))
+            }
+            .store(in: &cancellables)
     }
     
     private func observePlayerStatus() {
