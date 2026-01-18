@@ -37,6 +37,7 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
         self.sessionConfiguration = sessionConfiguration
         startObservingPlayer()
         startAudioSession()
+        setupAirPlay()
     }
     
     deinit {
@@ -92,12 +93,20 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
         try? AVAudioSession.sharedInstance().setActive(true)
         #endif
     }
+    
+    private func setupAirPlay() {
+        #if os(iOS)
+        player.allowsExternalPlayback = true
+        player.usesExternalPlaybackWhileExternalScreenIsActive = true
+        #endif
+    }
 
     // MARK: Observers
     private func startObservingPlayer() {
         observePlayerStatus()
         observePlaybackTime()
         observePlaybackErrors()
+        observeAirPlayStatus()
     }
 
     private func observePlayerItem(_ item: AVPlayerItem) {
@@ -191,6 +200,17 @@ final class AVPlaybackPlayerEngine: PlayerEngine, AVPlayerProvider {
             }
             .sink { [weak self] error in
                 self?.broadcast(event: .error(error))
+            }
+            .store(in: &cancellables)
+    }
+    
+    func observeAirPlayStatus() {
+        player.publisher(for: \.isExternalPlaybackActive)
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isActive in
+                guard let self else { return }
+                self.broadcast(event: .airPlayStatusChanged(isActive))
             }
             .store(in: &cancellables)
     }

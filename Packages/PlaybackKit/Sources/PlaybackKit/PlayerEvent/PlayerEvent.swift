@@ -12,5 +12,6 @@ public enum PlayerEvent {
     case lifecycle(LifecycleEvent)
     case diagnostics
     case videoSizeChanged(CGSize)
+    case airPlayStatusChanged(Bool)
     case error(PlayerError)
 }

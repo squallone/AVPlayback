@@ -20,7 +20,8 @@ final class VideoPlayerViewModel {
     var bufferProgress: Double = 0
     var currentItem: PlayerItem?
     var activeError: PlayerError?
-    
+    var isAirPlayActive: Bool = false
+
     var scaleMode: VideoScaleMode = .fill
     var videoSize: CGSize = .zero
     var videoAspectRatio: CGFloat {
@@ -63,6 +64,8 @@ final class VideoPlayerViewModel {
             handleStateChange(stateChange)
         case .videoSizeChanged(let size):
             self.videoSize = size
+        case .airPlayStatusChanged(let isActive):
+            self.isAirPlayActive = isActive
         case .error(let error):
             self.activeError = error
             

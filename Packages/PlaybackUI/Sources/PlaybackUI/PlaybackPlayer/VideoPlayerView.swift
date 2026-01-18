@@ -24,17 +24,31 @@ public struct VideoPlayerView: View {
         ZStack {
             Color.black.ignoresSafeArea()
             
-            VideoPlayerSurface(
-                player: viewModel.player,
-                mode: viewModel.scaleMode
-            )
-            .ignoresSafeArea(edges: .vertical)
-            .onTapGesture {
-                toggleControls()
-            }
-            .onTapGesture(count: 2) {
-                withAnimation {
-                    viewModel.toggleScaleMode()
+            
+            if viewModel.isAirPlayActive {
+                VStack {
+                    Image(systemName: "airplayvideo")
+                        .font(.system(size: 60))
+                        .foregroundStyle(.gray)
+                    Text("Playing on AirPlay")
+                        .foregroundStyle(.gray)
+                }
+                .onTapGesture {
+                    toggleControls()
+                }
+            } else {
+                VideoPlayerSurface(
+                    player: viewModel.player,
+                    mode: viewModel.scaleMode
+                )
+                .ignoresSafeArea(edges: .vertical)
+                .onTapGesture {
+                    toggleControls()
+                }
+                .onTapGesture(count: 2) {
+                    withAnimation {
+                        viewModel.toggleScaleMode()
+                    }
                 }
             }
             
