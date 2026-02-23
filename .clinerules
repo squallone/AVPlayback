@@ -1,0 +1,224 @@
+# AVPlayback Project Rules
+
+## Project Overview
+- Swift-based iOS/macOS application for audio/video playback
+- Uses SwiftUI for UI components
+- Follows modern Swift concurrency patterns (async/await)
+- **Modular architecture** with Swift Package Manager modules
+- Targets latest iOS/macOS versions
+
+## Modular Architecture
+
+### Current Modules
+The project is organized into focused, reusable modules:
+
+1. **AppFoundation**
+   - Core utilities and shared infrastructure
+   - Foundation extensions and helpers
+   - Common types and protocols used across modules
+   - No dependencies on other app modules
+   - Should remain UI-agnostic
+
+2. **PlaybackKit**
+   - Business logic for media playback
+   - AVFoundation wrappers and abstractions
+   - Playback state management
+   - Media handling and processing
+   - Depends on: AppFoundation
+   - Should be UI-agnostic (can be used in CLI tools, etc.)
+
+3. **PlaybackUI**
+   - SwiftUI views and components for playback interface
+   - View models for playback UI
+   - Player controls and UI elements
+   - Depends on: AppFoundation, PlaybackKit
+
+### Module Design Principles
+- **Single Responsibility**: Each module has a clear, focused purpose
+- **Dependency Direction**: Dependencies flow in one direction (no circular dependencies)
+- **Encapsulation**: Modules expose only necessary public APIs
+- **Testability**: Modules can be tested independently
+- **Reusability**: Modules can be used in different contexts
+
+### Adding New Modules
+When creating new modules, follow these guidelines:
+
+1. **Naming Convention**: Use descriptive, action-oriented names (e.g., `NetworkKit`, `StorageKit`, `AnalyticsKit`)
+
+2. **Module Structure**:
+   ```
+   ModuleName/
+   ├── Sources/
+   │   └── ModuleName/
+   │       ├── Public API files
+   │       └── Internal implementation
+   └── Tests/
+       └── ModuleNameTests/
+   ```
+
+3. **Dependency Rules**:
+   - Prefer depending on AppFoundation over duplicating code
+   - Avoid deep dependency chains (max 2-3 levels)
+   - Document dependencies in module README
+   - UI modules should depend on business logic modules, not vice versa
+
+4. **Public API Design**:
+   - Mark types as `public` only when needed outside the module
+   - Use `internal` by default
+   - Document all public APIs
+   - Consider protocol-based APIs for flexibility
+
+5. **Potential Future Modules**:
+   - `NetworkKit` - Networking layer for remote media
+   - `StorageKit` - Local media storage and caching
+   - `MediaLibrary` - Media catalog and organization
+   - `AnalyticsKit` - Usage tracking and analytics
+   - `SettingsKit` - App configuration and preferences
+   - `ExportKit` - Media export functionality
+
+### Inter-Module Communication
+- Use protocols to define contracts between modules
+- Prefer dependency injection over singletons
+- Use Swift concurrency (async/await) for asynchronous operations
+- Consider using Combine for reactive patterns when appropriate
+
+### Module Testing Strategy
+- Each module has its own test target
+- Test modules independently
+- Mock dependencies from other modules
+- Integration tests should live in the main app target
+
+## Code Style Guidelines
+
+### Swift Style
+- Use Swift naming conventions (camelCase for variables/functions, PascalCase for types)
+- Prefer `let` over `var` when possible
+- Use explicit type annotations for public APIs
+- Leverage Swift's type inference for local variables
+- Use trailing closure syntax when appropriate
+
+### SwiftUI Patterns
+- Keep views small and focused
+- Extract reusable components into separate views
+- Use `@State`, `@StateObject`, `@ObservedObject`, and `@EnvironmentObject` appropriately
+- Follow SwiftUI view lifecycle best practices
+- Use `.task` modifier for async operations in views
+
+### Code Organization
+- One type per file (with related small types as exceptions)
+- Group related functionality using `// MARK: -` comments
+- Order: properties → initializers → public methods → private methods
+- Keep files under 400 lines when possible
+
+## App Architecture
+
+### App Structure
+- Entry point: `AVPlaybackApp.swift`
+- Root view: `AppRoot.swift`
+- Follow MVVM or similar architecture pattern
+- Separate business logic (PlaybackKit) from UI code (PlaybackUI)
+
+### Layer Responsibilities
+- **App Layer**: App initialization, dependency setup, routing
+- **UI Layer** (PlaybackUI): Views, view models, UI state
+- **Business Logic Layer** (PlaybackKit): Playback logic, media handling
+- **Foundation Layer** (AppFoundation): Utilities, extensions, common types
+
+### AVFoundation Usage
+- Encapsulate AVFoundation APIs in PlaybackKit
+- Use `AVPlayer` for playback functionality
+- Handle player state changes properly
+- Implement proper error handling for media loading
+- Consider background playback requirements
+- Handle audio session configuration appropriately
+
+### Data Flow
+- UI Layer → Business Logic Layer → Foundation Layer
+- Use Swift concurrency for async operations
+- Avoid blocking the main thread
+- Handle network requests properly
+- Implement proper caching strategies if needed
+
+## Testing
+
+### Unit Tests
+- Write tests in module test targets (e.g., `PlaybackKitTests`)
+- Test business logic independently
+- Mock external dependencies
+- Aim for meaningful test coverage
+- Test modules in isolation
+
+### Integration Tests
+- Write in `AVPlaybackTests/`
+- Test module interactions
+- Verify end-to-end flows
+
+### UI Tests
+- UI tests go in `AVPlaybackUITests/`
+- Test critical user flows
+- Keep UI tests maintainable and not brittle
+
+## Best Practices
+
+### Error Handling
+- Use Swift's `Result` type or `throws` for error propagation
+- Provide meaningful error messages
+- Handle errors at appropriate levels
+- Define error types per module
+
+### Performance
+- Profile performance for media playback
+- Optimize view updates in SwiftUI
+- Use Instruments to identify bottlenecks
+- Handle memory management properly
+- Consider module loading time
+
+### Accessibility
+- Add accessibility labels and hints
+- Support VoiceOver
+- Test with accessibility features enabled
+
+### Asset Management
+- Place assets in `Assets.xcassets`
+- Use SF Symbols where appropriate
+- Support dark mode
+
+## Dependencies
+- Check `Packages/` directory for Swift Package Manager modules
+- Document any new dependencies added
+- Keep dependencies up to date
+- Prefer creating internal modules over adding external dependencies
+
+## Git Workflow
+- Follow conventional commit message format
+- Keep commits focused and atomic
+- Write descriptive commit messages
+- Branch from `main` for new features
+- Consider module-specific branches for large module additions
+
+## Platform Considerations
+- Support both light and dark mode
+- Consider iPad and Mac Catalyst if applicable
+- Test on multiple device sizes
+- Handle safe area insets properly
+- Design modules to be platform-agnostic when possible
+
+## Common Pitfalls to Avoid
+- Don't use force unwrapping (`!`) without clear justification
+- Avoid massive view controllers/views
+- Don't ignore memory leaks (use `[weak self]` in closures when needed)
+- Don't block the main thread with heavy operations
+- Avoid hardcoded strings (use localization when appropriate)
+- Don't create circular dependencies between modules
+- Avoid leaking implementation details in public module APIs
+
+## When Making Changes
+1. Understand the existing architecture before modifying
+2. Determine which module(s) the change affects
+3. Keep changes within appropriate module boundaries
+4. Write or update tests for new functionality
+5. Ensure code compiles without warnings
+6. Test on actual devices when dealing with AV playback
+7. Consider performance implications of changes
+8. Update documentation if adding new features or modules
+9. Review public API changes carefully for breaking changes

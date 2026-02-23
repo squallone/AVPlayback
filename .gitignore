@@ -60,3 +60,22 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# AI & Claude Code
+#
+# Claude Code configuration (.clinerules) should be committed
+# but temporary AI artifacts should be ignored
+
+# AI conversation histories and caches
+.claude/
+.ai-cache/
+
+# AI-generated temporary files
+*.ai-draft
+*.claude-temp
+
+# Cursor AI (if used)
+.cursor/
+
+# GitHub Copilot chat history (if stored locally)
+.copilot/
